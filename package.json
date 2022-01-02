@@ -4,14 +4,24 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "npm run build:client && npm run build:server",
+    "build:server": "SSR=1 vue-cli-service build --dest dist/server --modern",
+    "build:client": "vue-cli-service build --dest dist/client",
+    "lint": "vue-cli-service lint",
+    "start": "PORT=3000 node server.js"
   },
   "dependencies": {
+    "autoprefixer": "^10.4.1",
+    "axios": "^0.24.0",
     "core-js": "^3.8.3",
+    "express": "^4.17.2",
+    "morgan": "^1.10.0",
+    "postcss": "^8.4.5",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",
-    "vuex": "^3.6.2"
+    "vue-server-renderer": "^2.6.14",
+    "vuex": "^3.6.2",
+    "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -26,6 +36,8 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^8.0.3",
     "prettier": "^2.4.1",
-    "vue-template-compiler": "^2.6.14"
+    "tailwindcss": "^3.0.8",
+    "vue-template-compiler": "^2.6.14",
+    "webpack-node-externals": "^3.0.0"
   }
 }

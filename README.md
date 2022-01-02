@@ -20,5 +20,13 @@ npm run build
 npm run lint
 ```
 
+### Start server
+```
+npm run start
+```
+
+### Vue.js Server-Side Rendering Guide
+See [Vue SSR Guide](https://ssr.vuejs.org/)
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
