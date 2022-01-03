@@ -8,27 +8,26 @@ module.exports = defineConfig({
   transpileDependencies: true,
   indexPath: 'index.template.html',
   chainWebpack: webpackConfig => {
-    // 删除 HTML 相关的 webpack 插件
-    webpackConfig.plugins.delete('html')
-
-    // 用 cli 的模版会造成引入两次 script
-    // 保留模版中的 vue-ssr-outlet
-    // webpackConfig.when(process.env.NODE_ENV === 'production', webpackConfig => {
-    //   webpackConfig.plugin('html').tap(args => {
-    //     // https://github.com/jantimon/html-webpack-plugin#minification
-    //     args[0].minify = {
-    //       collapseWhitespace: true,
-    //       keepClosingSlash: true,
-    //       removeComments: true,
-    //       removeRedundantAttributes: true,
-    //       removeScriptTypeAttributes: true,
-    //       removeStyleLinkTypeAttributes: true,
-    //       useShortDoctype: true,
-    //       ignoreCustomComments: [/vue-ssr-outlet/],
-    //     }
-    //     return args
-    //   })
-    // })
+    webpackConfig.when(process.env.NODE_ENV === 'production', webpackConfig => {
+      // 删除 HTML 相关的 webpack 插件
+      webpackConfig.plugins.delete('html')
+      // 用 cli 的模版会造成引入两次 script
+      // 保留模版中的 vue-ssr-outlet
+      // webpackConfig.plugin('html').tap(args => {
+      //   // https://github.com/jantimon/html-webpack-plugin#minification
+      //   args[0].minify = {
+      //     collapseWhitespace: true,
+      //     keepClosingSlash: true,
+      //     removeComments: true,
+      //     removeRedundantAttributes: true,
+      //     removeScriptTypeAttributes: true,
+      //     removeStyleLinkTypeAttributes: true,
+      //     useShortDoctype: true,
+      //     ignoreCustomComments: [/vue-ssr-outlet/],
+      //   }
+      //   return args
+      // })
+    })
 
     // 我们需要禁用 cache loader，否则客户端构建版本会从服务端构建版本使用缓存过的组件
     webpackConfig.module.rule('vue').uses.delete('cache-loader')
