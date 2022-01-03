@@ -23,7 +23,7 @@ function created() {
 
 function beforeMount() {
   if (!this._hydrated) {
-    return this.$options.fetch.call(this)
+    return this.$fetch()
   }
 }
 
@@ -31,6 +31,7 @@ export default {
   beforeCreate() {
     if (typeof this.$options.fetch !== 'function') return
 
+    this.$fetch = this.$options.fetch.bind(this)
     addLifecycleHook(this, 'created', created)
     addLifecycleHook(this, 'beforeMount', beforeMount)
   },
